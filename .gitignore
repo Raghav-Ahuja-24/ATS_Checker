@@ -1,0 +1,18 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Streamlit specific
+.streamlit/secrets.toml
+
+# Excel files and data
+*.xlsx
+*.xls
+*.csv
+!Copy of Trend Ecosystem.xlsx
