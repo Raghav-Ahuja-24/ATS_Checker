@@ -714,18 +714,10 @@ with st.sidebar:
 
     for fname in selected_files:
         src = file_sources[fname]
-        if src["type"] == "local":
-            sheets = get_sheet_names(src["path"])
-        else:
             sheets = get_sheet_names_bytes(src["bytes"])
-
         sel_sheet = st.selectbox(f"Sheet — {fname}", sheets, index=0, key=f"sh_{fname}")
 
-        if src["type"] == "local":
-            headers, file_candidates = load_local_file(src["path"], sel_sheet)
-        else:
             headers, file_candidates = load_uploaded_file(src["bytes"], sel_sheet)
-
         for h in headers.values():
             if h not in all_headers_set:
                 all_headers_set.append(h)
