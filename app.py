@@ -34,6 +34,7 @@ st.set_page_config(
 )
 
 # ── Constants ────────────────────────────────────────────────────────────────
+
 # Short display names for long column headers
 HEADER_SHORT_NAMES = {
     "Ans(Key Skills)": "Key Skills",
@@ -695,7 +696,7 @@ with st.sidebar:
             file_sources[f"📤 {uf.name}"] = {"type": "upload", "bytes": uf.getvalue(), "name": uf.name}
 
     if not file_sources:
-                st.info("\U0001F448 Please upload one or more Excel candidate files from the sidebar to begin.")
+        st.info("Upload an Excel file to get started.")
         st.stop()
 
     selected_files = st.multiselect(
@@ -714,10 +715,12 @@ with st.sidebar:
 
     for fname in selected_files:
         src = file_sources[fname]
-            sheets = get_sheet_names_bytes(src["bytes"])
+        sheets = get_sheet_names_bytes(src["bytes"])
+
         sel_sheet = st.selectbox(f"Sheet — {fname}", sheets, index=0, key=f"sh_{fname}")
 
-            headers, file_candidates = load_uploaded_file(src["bytes"], sel_sheet)
+        headers, file_candidates = load_uploaded_file(src["bytes"], sel_sheet)
+
         for h in headers.values():
             if h not in all_headers_set:
                 all_headers_set.append(h)
