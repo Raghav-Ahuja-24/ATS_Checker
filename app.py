@@ -34,9 +34,6 @@ st.set_page_config(
 )
 
 # ── Constants ────────────────────────────────────────────────────────────────
-EXCEL_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                          "Copy of Trend Ecosystem.xlsx")
-
 # Short display names for long column headers
 HEADER_SHORT_NAMES = {
     "Ans(Key Skills)": "Key Skills",
@@ -688,19 +685,17 @@ with st.sidebar:
         "Upload Excel files",
         type=["xlsx"],
         accept_multiple_files=True,
-        help="Upload .xlsx candidate files. Combined with the default local file if present.",
+        help="Upload .xlsx candidate files to search.",
         label_visibility="collapsed",
     )
 
     file_sources = {}
-    if os.path.exists(EXCEL_FILE):
-        file_sources[f"📁 {os.path.basename(EXCEL_FILE)}"] = {"type": "local", "path": EXCEL_FILE}
     if uploaded_files:
         for uf in uploaded_files:
             file_sources[f"📤 {uf.name}"] = {"type": "upload", "bytes": uf.getvalue(), "name": uf.name}
 
     if not file_sources:
-        st.warning("No files available. Upload an Excel file to get started.")
+                st.info("\U0001F448 Please upload one or more Excel candidate files from the sidebar to begin.")
         st.stop()
 
     selected_files = st.multiselect(
